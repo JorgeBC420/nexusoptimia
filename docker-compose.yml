@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+  # ============ NEXUSOPTIM AI CORE ============
+  nexusoptim-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexusoptim_ai_core
+    restart: unless-stopped
+    ports:
+      - "8000:8000"    # FastAPI REST API
+      - "8001:8001"    # WebSocket para tiempo real
+    volumes:
+      - ./data:/home/nexusoptim/data
+      - ./models:/home/nexusoptim/models
+      - ./logs:/home/nexusoptim/logs
+    environment:
+      - ENVIRONMENT=production
+      - LORA_FREQUENCY=915000000  # Costa Rica ISM Band
+      - MODEL_PATH=/home/nexusoptim/models
+      - LOG_LEVEL=INFO
+    networks:
+      - nexusoptim_network
+    depends_on:
+      - mqtt-broker
+      - timescaledb
+
+  # ============ MQTT BROKER (LoRa Gateway) ============
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: nexusoptim_mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"    # MQTT
+      - "8883:8883"    # MQTT over SSL
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data/mosquitto:/mosquitto/data
+      - ./logs/mosquitto:/mosquitto/log
+    networks:
+      - nexusoptim_network
+
+  # ============ TIMESCALE DB (Time Series) ============
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    container_name: nexusoptim_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=nexusoptim
+      - POSTGRES_USER=nexusoptim
+      - POSTGRES_PASSWORD=nexusoptim_secure_2025
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - nexusoptim_network
+
+  # ============ REDIS (Caching & Real-time) ============
+  redis:
+    image: redis:7-alpine
+    container_name: nexusoptim_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --requirepass nexusoptim_redis_2025
+    volumes:
+      - redis_data:/data
+    networks:
+      - nexusoptim_network
+
+  # ============ GRAFANA (Monitoring Dashboard) ============
+  grafana:
+    image: grafana/grafana:latest
+    container_name: nexusoptim_grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=nexusoptim_admin_2025
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning
+    networks:
+      - nexusoptim_network
+    depends_on:
+      - timescaledb
+
+  # ============ NODE-RED (LoRa Flow Processing) ============
+  node-red:
+    image: nodered/node-red:latest
+    container_name: nexusoptim_nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - node_red_data:/data
+    environment:
+      - TZ=America/Costa_Rica
+    networks:
+      - nexusoptim_network
+    depends_on:
+      - mqtt-broker
+
+# ============ NETWORKS ============
+networks:
+  nexusoptim_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# ============ VOLUMES ============
+volumes:
+  timescale_data:
+    driver: local
+  redis_data:
+    driver: local
+  grafana_data:
+    driver: local
+  node_red_data:
+    driver: local
