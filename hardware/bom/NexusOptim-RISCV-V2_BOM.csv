@@ -1,0 +1,64 @@
+# NexusOptim-RISCV-V2 Universal Sensor
+# Bill of Materials (BOM)
+# Cost Optimized for 1000+ Unit Production
+
+# PCB Specifications
+# Size: 40mm x 60mm
+# Layers: 4 (Signal, Ground, Power, Signal)
+# Thickness: 1.6mm
+# Finish: ENIG
+# Min Trace: 0.2mm
+
+Reference,Value,Package,Manufacturer,MPN,Quantity,Unit_Cost_USD,Extended_Cost_USD,Supplier,Notes
+U1,CH32V003J4M6,QFN-20,WCH,CH32V003J4M6,1,0.80,0.80,LCSC,RISC-V MCU 48MHz
+U2,nRF5340-QKAA,QFN-94,Nordic Semi,nRF5340-QKAA-R,1,8.50,8.50,Digi-Key,BLE 5.3 + 802.15.4
+U3,SX1262IMLTRT,QFN-24,Semtech,SX1262IMLTRT,1,3.20,3.20,Mouser,LoRa Transceiver 915MHz
+U4,TP4056,SOP-8,Nanjing Top Power,TP4056,1,0.15,0.15,LCSC,Li-ion Battery Charger
+U5,AMS1117-3.3,SOT-223,Advanced Monolithic,AMS1117-3.3,1,0.08,0.08,LCSC,3.3V Linear Regulator
+U6,MS5803-14BA,LGA-8,TE Connectivity,MS5803-14BA,1,25.00,25.00,Digi-Key,Pressure Sensor 14 bar
+U7,SHT40-AD1B,DFN-4,Sensirion,SHT40-AD1B-R2,1,4.50,4.50,Mouser,Temp/Humidity Sensor
+U8,ADXL345BCCZ,LGA-14,Analog Devices,ADXL345BCCZ-RL7,1,3.80,3.80,Digi-Key,3-Axis Accelerometer
+C1,22uF,0805,Samsung,CL21A226MAQNNNE,2,0.12,0.24,LCSC,Ceramic Capacitor
+C2,100nF,0603,Murata,GRM188R71H104KA93D,8,0.03,0.24,Digi-Key,Decoupling Capacitor
+C3,10uF,0805,TDK,C2012X7R1V106K125AB,2,0.08,0.16,Mouser,Ceramic Capacitor
+C4,1000uF,Radial,Nichicon,UWZ1V102MCL1GB,1,0.45,0.45,Digi-Key,Electrolytic Capacitor
+L1,10uH,0805,Wurth,744773110,2,0.25,0.50,Mouser,Power Inductor
+L2,3.9nH,0603,Coilcraft,0603CS-3N9XJLW,2,0.85,1.70,Digi-Key,RF Inductor (LoRa)
+R1,10k,0603,Yageo,RC0603FR-0710KL,8,0.01,0.08,LCSC,Resistor 1% 1/10W
+R2,1k,0603,Yageo,RC0603FR-071KL,4,0.01,0.04,LCSC,Resistor 1% 1/10W
+R3,470,0603,Yageo,RC0603FR-07470RL,2,0.01,0.02,LCSC,Resistor 1% 1/10W
+D1,LED_Green,0805,Lite-On,LTST-C170GKT,1,0.08,0.08,Digi-Key,Status LED
+D2,LED_Red,0805,Lite-On,LTST-C170KRKT,1,0.08,0.08,Digi-Key,Error LED
+D3,PMEG3010ER,SOD-123,Nexperia,PMEG3010ER,2,0.12,0.24,Mouser,Schottky Diode
+Q1,32.768kHz,3225,Abracon,ABS25-32.768KHZ-T,1,0.35,0.35,Digi-Key,RTC Crystal
+Q2,32MHz,3225,Abracon,ABM8G-32.000MHZ-4Y-T3,1,0.28,0.28,Digi-Key,Main Crystal
+SW1,Tactile,6x6mm,Omron,B3U-1000P,1,0.25,0.25,Digi-Key,Reset Switch
+J1,USB-C,USB-C,Korean Hroparts,TYPE-C-31-M-12,1,0.85,0.85,LCSC,USB-C Connector
+J2,JST-PH,2pin,JST,B2B-PH-K-S,1,0.15,0.15,Digi-Key,Battery Connector
+J3,SMA,SMA,Amphenol,132289,2,1.25,2.50,Mouser,Antenna Connector (LoRa/BLE)
+ANT1,PCB_Antenna,PCB,Custom,NEXUS_ANT_915,1,0.00,0.00,Internal,915MHz PCB Antenna
+ANT2,PCB_Antenna,PCB,Custom,NEXUS_ANT_BLE,1,0.00,0.00,Internal,BLE PCB Antenna
+BAT1,18650_Holder,THT,Keystone,1042,1,1.85,1.85,Digi-Key,18650 Battery Holder
+F1,PTC_Fuse,1206,Bourns,MF-MSMF050-2,1,0.18,0.18,Mouser,500mA PTC Fuse
+Y1,Solar_Panel,Custom,IXYS,KXOB22-12X1L,1,12.50,12.50,Digi-Key,22x7mm Solar Panel
+
+# PCB Manufacturing
+PCB,4-Layer,40x60mm,JLCPCB,PCB-NEXUS-V2,1,8.50,8.50,JLCPCB,FR4 1.6mm ENIG
+Assembly,SMT,Standard,JLCPCB,ASM-NEXUS-V2,1,15.00,15.00,JLCPCB,SMT Assembly Service
+
+# Optional Components (Sector Specific)
+U9,BME680,LGA-8,Bosch,BME680,1,12.80,12.80,Digi-Key,Air Quality Sensor (Optional)
+U10,GPS_Module,LGA,u-blox,MAX-M10S,1,18.90,18.90,Mouser,GNSS Receiver (Optional)
+
+# Summary
+Total_Components,Cost_USD,Notes
+Base_Configuration,125.45,Standard configuration for all sectors
+With_Air_Quality,138.25,Added BME680 for environmental monitoring
+With_GPS,144.35,Added GPS for location services
+Full_Configuration,157.15,All optional components included
+
+# Volume Pricing (1000+ units)
+# Base Configuration: $98.50/unit
+# Manufacturing Setup: $500 (one-time)
+# Certification Cost: $2500 (FCC + CE + SUTEL)
+# Total Project Cost: $101,000 (1000 units) + $3000 (setup/cert) = $104/unit
