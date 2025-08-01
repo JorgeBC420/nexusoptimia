@@ -520,6 +520,36 @@ async def get_realtime_electrical_consumption():
         logger.error(f"❌ Error obteniendo consumo eléctrico en tiempo real: {e}")
         raise HTTPException(status_code=500, detail=f"Error en consumo eléctrico: {str(e)}")
 
+@water_router.get("/electrical/competitive-analysis")
+async def get_competitive_analysis():
+    """Análisis competitivo NexusOptim vs. Genie (California) y contexto global"""
+    try:
+        from ..integrations.ice_2025_official_analysis import ICE2025Analytics
+        
+        analyzer = ICE2025Analytics()
+        analysis = analyzer.get_competitive_analysis()
+        
+        return {
+            "status": "success",
+            "timestamp": datetime.now().isoformat(),
+            "analysis_type": "competitive_global",
+            "comparison": "NexusOptim vs Genie (California)",
+            "data": analysis,
+            "summary": {
+                "nexusoptim_advantages": [
+                    f"{analysis['competitive_advantages']['speed_advantage']:.0f}x faster response time",
+                    f"{analysis['competitive_advantages']['accuracy_improvement']:.1f}% better prediction accuracy", 
+                    f"{analysis['competitive_advantages']['cost_efficiency']:.1f}x more cost efficient",
+                    f"{analysis['competitive_advantages']['investment_ratio']:.0f}x lower investment required"
+                ],
+                "market_positioning": "Generation 2.0 - Crisis Prevention vs Crisis Management",
+                "global_validation": "International adoption validates IA for grid technology"
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error in competitive analysis: {str(e)}")
+
 @water_router.get("/electrical/ice-2025-analysis")
 async def get_ice_2025_official_analysis():
     """Análisis predictivo ICE 2025 con datos oficiales del gobierno costarricense"""

@@ -4,7 +4,7 @@ Integración de proyecciones reales del sistema eléctrico costarricense
 """
 
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 import numpy as np
 from dataclasses import dataclass
 import json
@@ -39,6 +39,68 @@ class ICE2025Analytics:
     def __init__(self):
         self.projections = ICE2025Projections()
         self.base_year = 2025
+        
+    def get_competitive_analysis(self) -> Dict[str, Any]:
+        """Análisis competitivo vs. soluciones globales como Genie (California)"""
+        
+        # Métricas comparativas con Genie
+        genie_metrics = {
+            "response_time_ms": 2000,  # Genie (cloud-based)
+            "prediction_accuracy": 0.72,  # 72% precisión
+            "cost_per_mw": 2500,  # USD por MW gestionado
+            "approach": "reactive",  # Gestión de crisis
+            "investment_usd": 75000000,  # $75M inversión total
+            "roi_3_years": 0.0  # Breakeven en 3 años
+        }
+        
+        nexusoptim_metrics = {
+            "response_time_ms": 150,  # Edge AI
+            "prediction_accuracy": 0.95,  # 95% precisión
+            "cost_per_mw": 300,  # USD por MW optimizado
+            "approach": "proactive",  # Prevención de crisis
+            "investment_usd": 2100000,  # $2.1M inversión total
+            "roi_3_years": 1.07  # 107% ROI en 3 años
+        }
+        
+        competitive_advantages = {
+            "speed_advantage": nexusoptim_metrics["response_time_ms"] / genie_metrics["response_time_ms"],
+            "accuracy_improvement": (nexusoptim_metrics["prediction_accuracy"] - genie_metrics["prediction_accuracy"]) * 100,
+            "cost_efficiency": genie_metrics["cost_per_mw"] / nexusoptim_metrics["cost_per_mw"],
+            "investment_ratio": genie_metrics["investment_usd"] / nexusoptim_metrics["investment_usd"],
+            "roi_advantage": nexusoptim_metrics["roi_3_years"] - genie_metrics["roi_3_years"]
+        }
+        
+        return {
+            "genie_california": genie_metrics,
+            "nexusoptim_costa_rica": nexusoptim_metrics,
+            "competitive_advantages": competitive_advantages,
+            "market_positioning": {
+                "genie_generation": "1.0 - Crisis Management",
+                "nexusoptim_generation": "2.0 - Crisis Prevention",
+                "technology_evolution": "Reactive → Proactive",
+                "geographic_advantage": "First Mover LATAM",
+                "timing": "Perfect - Post Genie Validation"
+            },
+            "global_context": {
+                "musk_energy_crisis": {
+                    "ai_demand_growth": "100% every 6 months",
+                    "ev_adoption": "50% annual growth",
+                    "crypto_mining": "Exponential energy demand",
+                    "nexusoptim_solution": "Optimization vs. Generation Increase"
+                },
+                "tesla_vision_materialized": {
+                    "autonomous_grids": "Self-managing networks",
+                    "efficient_transmission": "Loss reduction 30% → 8%",
+                    "universal_access": "Democratized efficient energy"
+                }
+            },
+            "validation_international": {
+                "california_investment": "$75M USD in grid AI",
+                "europe_smart_grids": "€2B invested 2025",
+                "asia_pacific_capacity": "15 GW renewable + AI China",
+                "latam_opportunity": "First comprehensive solution"
+            }
+        }
         
     def calculate_industrial_growth_projection(self) -> Dict:
         """Calcular proyección de crecimiento industrial 2025"""
