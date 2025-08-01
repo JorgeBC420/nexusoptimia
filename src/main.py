@@ -17,7 +17,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
-from core.config import settings
+from core.config_simple import settings
 from core.logging_config import setup_logging
 from api.routes import router as api_router
 from services.sensor_service import SensorService

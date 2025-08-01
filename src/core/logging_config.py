@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from core.config import settings
+from core.config_simple import settings
 
 def setup_logging():
     """Configurar sistema de logging para NexusOptim IA"""
