@@ -177,11 +177,11 @@ Estimación Costo Mensual (tarifas 2025):
 
 ### **Responsable Técnico**
 ```
-Nombre: Jorge Badilla Cordero
-Empresa: NexusOptim IA
-Email: jorge@nexusoptim.ai
-Teléfono: +506 8888-8888
-LinkedIn: linkedin.com/in/jorgebadilla
+Nombre: Jorge Bravo Chaves
+Empresa: NexusOptim IA (OpenNexus)
+Email: jorgebravo92@gmail.com
+Teléfono: +506 71880297
+Sitio Web: countercorehazardav.com
 ```
 
 ### **Para Auditoría de Datos**

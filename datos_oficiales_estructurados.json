@@ -3,8 +3,10 @@
     "title": "Datos Oficiales Sistema Eléctrico Costa Rica 2025",
     "version": "1.0.0",
     "date": "2025-08-01",
-    "author": "NexusOptim IA - Jorge Badilla Cordero",
-    "contact": "jorge@nexusoptim.ai",
+    "author": "NexusOptim IA (OpenNexus) - Jorge Bravo Chaves",
+    "contact": "jorgebravo92@gmail.com",
+    "phone": "+506 71880297",
+    "website": "countercorehazardav.com",
     "description": "Compilación estructurada de datos oficiales para análisis predictivo",
     "transparency_level": "Máxima - Todas las fuentes verificables"
   },
@@ -335,8 +337,11 @@
     "version_actual": "1.0.0",
     "fecha_creacion": "2025-08-01",
     "proxima_revision": "2025-09-01",
-    "responsable": "Jorge Badilla Cordero",
-    "email": "jorge@nexusoptim.ai",
+    "responsable": "Jorge Bravo Chaves",
+    "email": "jorgebravo92@gmail.com",
+    "telefono": "+506 71880297",
+    "empresa": "NexusOptim IA (OpenNexus)",
+    "sitio_web": "countercorehazardav.com",
     "politica_actualizacion": "Mensual o ante nuevos datos oficiales",
     "historial_cambios": [
       {
