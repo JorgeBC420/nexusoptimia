@@ -1,12 +1,234 @@
-# 🚀 NexusOptim IA - Edge AI para Optimización Eléctrica
+# 🚀 NexusOptim IA - Electrical Monitoring System
 
-**Inteligencia Artificial en el Edge para la optimización de redes eléctricas en Costa Rica**
+**Complete real-time electrical monitoring solution with LoRaWAN integration for industrial and infrastructure applications.**
 
 ---
 
-## 🌟 **Descripción**
+## 🌟 **Features**
 
-NexusOptim IA es una plataforma de Edge Computing que utiliza Inteligencia Artificial para optimizar redes eléctricas, reducir pérdidas técnicas y mejorar la eficiencia energética. Diseñado específicamente para las condiciones de Costa Rica.
+### Real-Time Monitoring
+- **Electrical Parameters**: Voltage, Current, Power (Active/Reactive/Apparent), Power Factor
+- **Power Quality**: THD (Total Harmonic Distortion), Frequency monitoring
+- **Safety Status**: Real-time safety alerts and status indicators
+- **Multi-Node Support**: Monitor multiple sensor nodes simultaneously
+
+### Advanced Visualization
+- **Real-Time Charts**: Live plotting with matplotlib integration
+- **Professional UI**: Dark theme with modern interface design
+- **Multi-Panel Layout**: Organized display of all electrical parameters
+- **Historical Trends**: Time-series data visualization
+
+### LoRaWAN Integration
+- **Helium Network**: Full integration with Helium LoRaWAN network
+- **AU915 Band**: Optimized for Costa Rica and Australia regions
+- **Real-Time Data**: Low-latency sensor data reception
+- **Simulation Mode**: Built-in simulation for testing and development
+
+### Hardware Support
+- **RISC-V Architecture**: CH32V003 + GD32VF103 dual-core design
+- **Professional PCBs**: Custom-designed sensor boards
+- **LoRaWAN Communication**: Integrated RF modules with antenna optimization
+- **Battery Powered**: Long-life operation with solar charging option
+
+## 📋 Requirements
+
+### Software Dependencies
+```bash
+pip install tkinter matplotlib numpy pygame
+```
+
+### System Requirements
+- Python 3.8 or higher
+- Windows 10/11 (tested)
+- 4GB RAM minimum
+- Internet connection for LoRaWAN (if not using simulation)
+
+## 🔧 Installation
+
+1. **Clone or Download**
+   ```bash
+   git clone <repository-url>
+   cd "NexusOptim IA"
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the Application**
+   ```bash
+   python ui/nexusoptim_launcher.py
+   ```
+
+## 📖 Usage
+
+### Quick Start
+1. Launch the application using `nexusoptim_launcher.py`
+2. Configure settings in the launcher (Simulation Mode recommended for first run)
+3. Click "Start Monitoring" to launch the monitoring dashboard
+4. The system will begin displaying real-time electrical data
+
+### Configuration Options
+- **Simulation Mode**: Use simulated data for testing and demonstration
+- **Data Logging**: Enable automatic logging of all sensor data
+- **Auto-start**: Automatically start monitoring on application launch
+- **Alert Thresholds**: Configure custom alert levels for electrical parameters
+
+### Monitoring Dashboard
+- **Live Data**: Real-time display of electrical parameters
+- **Status Indicators**: Visual safety and quality status
+- **Charts**: Time-series plotting of all measurements
+- **Alerts**: Pop-up notifications for critical conditions
+
+## 🏗️ System Architecture
+
+### Application Structure
+```
+ui/
+├── nexusoptim_launcher.py          # Main application launcher
+├── integrated_electrical_monitor.py # Core monitoring system
+├── electrical_monitoring_dashboard.py # UI dashboard components
+└── lorawan_receiver.py             # LoRaWAN data reception
+```
+
+### Data Flow
+1. **Sensor Nodes** → LoRaWAN transmission
+2. **Helium Network** → Data routing
+3. **LoRaWAN Receiver** → Packet parsing
+4. **Monitoring System** → Data processing
+5. **Dashboard UI** → Real-time visualization
+
+### Hardware Integration
+- **Sensor Firmware**: main_electrical.c (RISC-V C implementation)
+- **Communication**: LoRaWAN AU915 band
+- **Power Management**: Ultra-low power design
+- **Data Format**: Optimized 32-byte payload structure
+
+## 📊 Monitored Parameters
+
+### Electrical Measurements
+| Parameter | Range | Accuracy | Update Rate |
+|-----------|-------|----------|-------------|
+| Voltage RMS | 0-300V | ±0.5% | 1 Hz |
+| Current RMS | 0-20A | ±1% | 1 Hz |
+| Active Power | 0-6kW | ±1% | 1 Hz |
+| Reactive Power | ±6kVAR | ±2% | 1 Hz |
+| Power Factor | 0-1 | ±0.01 | 1 Hz |
+| Frequency | 45-65 Hz | ±0.01 Hz | 1 Hz |
+| THD Voltage | 0-25% | ±0.1% | 1 Hz |
+| THD Current | 0-25% | ±0.1% | 1 Hz |
+
+### Safety Features
+- **Overvoltage Protection**: Configurable thresholds
+- **Undervoltage Detection**: Brownout monitoring
+- **Overcurrent Alerts**: Load monitoring
+- **Frequency Deviation**: Grid stability monitoring
+- **Power Quality Analysis**: THD and power factor tracking
+
+## 🔧 Configuration
+
+### Alert Thresholds
+```json
+{
+    "alert_thresholds": {
+        "voltage_min": 210.0,
+        "voltage_max": 250.0,
+        "current_max": 15.0,
+        "frequency_min": 49.5,
+        "frequency_max": 50.5,
+        "thd_max": 5.0,
+        "power_factor_min": 0.85
+    }
+}
+```
+
+### LoRaWAN Settings
+```json
+{
+    "lorawan": {
+        "webhook_port": 8080,
+        "frequency_band": "AU915",
+        "network": "Helium"
+    }
+}
+```
+
+## 📝 Data Logging
+
+The system automatically logs all sensor data to JSON format:
+- **File**: `nexusoptim_data.json`
+- **Format**: One JSON object per line
+- **Contents**: Sensor data + network metadata
+- **Rotation**: Automatic file rotation at 100MB
+
+### Log Entry Example
+```json
+{
+    "timestamp": "2025-01-27T10:30:00.000Z",
+    "sensor_data": {
+        "node_id": "ELE001",
+        "voltage_rms": 230.5,
+        "current_rms": 8.2,
+        "power_active": 1890.0,
+        "power_factor": 0.92,
+        "frequency": 50.02,
+        "thd_voltage": 2.1,
+        "thd_current": 3.4,
+        "safety_status": 0,
+        "quality_grade": 95,
+        "battery_level": 87
+    },
+    "network_data": {
+        "dev_addr": "12345678",
+        "rssi": -89,
+        "snr": 8.5,
+        "gateway_id": "helium-gateway-001"
+    }
+}
+```
+
+## 🚨 Alerts and Notifications
+
+### Alert Types
+- **Critical**: Overvoltage, Overcurrent, Safety system triggers
+- **Warning**: Power quality issues, frequency deviation
+- **Info**: System status, connectivity issues
+
+### Notification Methods
+- **GUI Pop-ups**: Immediate visual alerts
+- **System Logging**: All alerts logged with timestamps
+- **Sound Alerts**: Configurable audio notifications
+- **Future**: Email and SMS notifications
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+**Application won't start:**
+- Check Python version (3.8+ required)
+- Verify all dependencies installed
+- Check file permissions
+
+**No data in simulation mode:**
+- Restart the application
+- Check system resources
+- Review logs in `nexusoptim_launcher.log`
+
+**LoRaWAN connection issues:**
+- Verify webhook port availability
+- Check network connectivity
+- Confirm Helium Console configuration
+
+**Performance issues:**
+- Reduce chart history length
+- Increase update interval
+- Close other applications
+
+### Log Files
+- `nexusoptim_launcher.log` - Application startup and control
+- `nexusoptim_electrical.log` - Monitoring system events
+- `nexusoptim_data.json` - Sensor data logging
 
 ### 🎯 **Características Principales**
 

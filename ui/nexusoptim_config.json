@@ -1,0 +1,29 @@
+{
+    "system": {
+        "name": "NexusOptim IA",
+        "version": "1.0.0",
+        "startup_mode": "launcher"
+    },
+    "monitoring": {
+        "simulation_mode": true,
+        "data_logging": true,
+        "auto_start": false,
+        "log_level": "INFO"
+    },
+    "lorawan": {
+        "webhook_port": 8080,
+        "frequency_band": "AU915",
+        "network": "Helium"
+    },
+    "alerts": {
+        "enable_notifications": true,
+        "sound_alerts": true,
+        "email_notifications": false,
+        "sms_notifications": false
+    },
+    "ui": {
+        "theme": "dark",
+        "update_interval": 1000,
+        "chart_history": 300
+    }
+}

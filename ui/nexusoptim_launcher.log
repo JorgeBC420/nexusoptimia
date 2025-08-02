@@ -1,0 +1,58 @@
+2025-08-01 22:25:04,969 - __main__ - INFO - Monitoring system started successfully
+2025-08-01 22:25:40,995 - __main__ - ERROR - Monitoring process error: INFO:__main__:Starting NexusOptim IA Electrical Monitoring System
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+INFO:lorawan_receiver:Started LoRaWAN simulation mode
+INFO:__main__:Started in simulation mode
+INFO:__main__:Data logging enabled
+INFO:__main__:System startup complete
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+ERROR:lorawan_receiver:Simulation error: module 'random' has no attribute 'exponential'
+INFO:__main__:Shutting down monitoring system
+INFO:__main__:Shutdown complete
+
+2025-08-01 22:25:42,830 - __main__ - WARNING - Monitoring process exited unexpectedly
+2025-08-01 22:26:53,882 - __main__ - INFO - Monitoring system started successfully
+2025-08-01 22:27:18,894 - __main__ - ERROR - Monitoring process error: INFO:__main__:Starting NexusOptim IA Electrical Monitoring System
+INFO:lorawan_receiver:Started LoRaWAN simulation mode
+INFO:__main__:Started in simulation mode
+INFO:__main__:Data logging enabled
+INFO:__main__:System startup complete
+WARNING:__main__:Node 1 ALERTS: Safety alerts: Overcurrent
+WARNING:__main__:Node 1 ALERTS: Safety alerts: Undervoltage
+WARNING:__main__:Node 1 ALERTS: Safety alerts: Overpower
+INFO:__main__:Shutting down monitoring system
+INFO:__main__:Shutdown complete
+
+2025-08-01 22:27:24,950 - __main__ - WARNING - Monitoring process exited unexpectedly
+2025-08-01 22:33:04,410 - __main__ - INFO - Monitoring system started successfully
+2025-08-01 22:33:39,427 - __main__ - INFO - Monitoring process exited

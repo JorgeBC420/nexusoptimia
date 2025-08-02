@@ -1,0 +1,15 @@
+{
+    "scenario": "normal",
+    "alert_frequency": "very_low",
+    "parameters": {
+        "voltage_base": 230.0,
+        "voltage_variation": 1.0,
+        "current_base": 10.0,
+        "current_variation": 0.5,
+        "frequency_base": 50.0,
+        "frequency_variation": 0.02,
+        "thd_base": 1.5,
+        "alert_probability": 0.005,
+        "active_nodes": 1
+    }
+}

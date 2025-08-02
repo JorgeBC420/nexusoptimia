@@ -1,5 +1,10 @@
 # NexusOptim IA - Requirements File
-# Edge AI para Optimización de Redes Eléctricas
+# Real-time Electrical Monitoring System
+
+# ============ CORE UI & VISUALIZATION ============
+matplotlib>=3.6.0  # Real-time plotting and charts
+numpy>=1.21.0      # Numerical computing and data arrays
+pygame>=2.1.0      # Graphics and sound for enhanced UI
 
 # ============ CORE AI & ML ============
 tensorflow==2.15.0
