@@ -1,0 +1,52 @@
+{% extends "base_dashboard.html" %}
+{% block tabs %}
+<div class="dashboard-tabs">
+    <a href="/dashboard/executive"><button class="dashboard-tab active">⚡ Eléctrica</button></a>
+    <a href="/dashboard/tourism"><button class="dashboard-tab btn-tourism">🌴 Turismo</button></a>
+    <a href="/dashboard/tutor"><button class="dashboard-tab btn-tutor">🎓 Tutor</button></a>
+    <a href="/dashboard/water"><button class="dashboard-tab btn-water">💧 Agua</button></a>
+    <a href="/dashboard/home"><button class="dashboard-tab btn-home">🏠 Casa</button></a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="dashboard-panel dashboard-panel-green">
+    <h2>Resumen del Sistema Eléctrico</h2>
+    <ul>
+        <li>Clientes totales: {{ data.system_overview.total_customers }}</li>
+        <li>Cobertura nacional: {{ data.system_overview.national_coverage }}%</li>
+        <li>Subestaciones activas: {{ data.system_overview.active_substations }}</li>
+        <li>Confiabilidad de red: {{ data.system_overview.grid_reliability }}%</li>
+        <li>Energía ahorrada: {{ data.system_overview.energy_saved_mwh }} MWh</li>
+        <li>Costo evitado: ₡{{ data.system_overview.cost_avoided_millions }} millones</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-green">
+    <h2>Métricas en Tiempo Real</h2>
+    <ul>
+        <li>Demanda actual: {{ data.real_time_metrics.current_demand_mw }} MW</li>
+        <li>Pico hoy: {{ data.real_time_metrics.peak_demand_today }} MW</li>
+        <li>% Renovable: {{ data.real_time_metrics.renewable_percentage }}%</li>
+        <li>CO₂ evitado: {{ data.real_time_metrics.co2_avoided_tons }} t</li>
+        <li>Frecuencia: {{ data.real_time_metrics.system_frequency }} Hz</li>
+        <li>Estabilidad de voltaje: {{ data.real_time_metrics.voltage_stability }}%</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-green">
+    <h2>Alertas</h2>
+    <ul>
+        <li>Críticas: {{ data.alerts_summary.critical }}</li>
+        <li>Advertencias: {{ data.alerts_summary.warning }}</li>
+        <li>Info: {{ data.alerts_summary.info }}</li>
+        <li>Total activas: {{ data.alerts_summary.total_active }}</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-green">
+    <h2>Impacto Financiero</h2>
+    <ul>
+        <li>Ahorro mensual: ₡{{ data.financial_impact.monthly_savings }}</li>
+        <li>Proyección anual: ₡{{ data.financial_impact.annual_projection }}</li>
+        <li>ROI: {{ data.financial_impact.roi_percentage }}%</li>
+        <li>Payback: {{ data.financial_impact.payback_months }} meses</li>
+    </ul>
+</div>
+{% endblock %}

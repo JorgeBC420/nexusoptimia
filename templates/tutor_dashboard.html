@@ -1,0 +1,23 @@
+{% extends "base_dashboard.html" %}
+{% block tabs %}
+<div class="dashboard-tabs">
+    <a href="/dashboard/executive"><button class="dashboard-tab btn-electric">⚡ Eléctrica</button></a>
+    <a href="/dashboard/tourism"><button class="dashboard-tab btn-tourism">🌴 Turismo</button></a>
+    <a href="/dashboard/tutor"><button class="dashboard-tab active btn-tutor">🎓 Tutor</button></a>
+    <a href="/dashboard/water"><button class="dashboard-tab btn-water">💧 Agua</button></a>
+    <a href="/dashboard/home"><button class="dashboard-tab btn-home">🏠 Casa</button></a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="dashboard-panel dashboard-panel-blue">
+    <h2>Maestro Tutor Estudiantil</h2>
+    <ul>
+        <li>Bienvenido, selecciona tu materia o consulta.</li>
+        <li>IA disponible: Ollama, Llama 3, Mistral, Phi-3, CodeLlama</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-blue">
+    <h2>Zona de Tutoría</h2>
+    <p>Aquí aparecerán las respuestas y recomendaciones del tutor IA.</p>
+</div>
+{% endblock %}

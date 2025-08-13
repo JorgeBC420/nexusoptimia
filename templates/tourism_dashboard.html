@@ -1,0 +1,25 @@
+{% extends "base_dashboard.html" %}
+{% block tabs %}
+<div class="dashboard-tabs">
+    <a href="/dashboard/executive"><button class="dashboard-tab btn-electric">⚡ Eléctrica</button></a>
+    <a href="/dashboard/tourism"><button class="dashboard-tab active btn-tourism">🌴 Turismo</button></a>
+    <a href="/dashboard/tutor"><button class="dashboard-tab btn-tutor">🎓 Tutor</button></a>
+    <a href="/dashboard/water"><button class="dashboard-tab btn-water">💧 Agua</button></a>
+    <a href="/dashboard/home"><button class="dashboard-tab btn-home">🏠 Casa</button></a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="dashboard-panel dashboard-panel-turquoise">
+    <h2>Smart Tourism Costa Rica</h2>
+    <ul>
+        <li>Ubicación: {{ data.location }}</li>
+        <li>Clima: {{ data.weather }}</li>
+        <li>Tours disponibles: {{ data.tours_available }}</li>
+        <li>Hoteles disponibles: {{ data.hotels_available }}</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-turquoise">
+    <h2>Recomendaciones IA</h2>
+    <pre>{{ data.ia_recommendations }}</pre>
+</div>
+{% endblock %}

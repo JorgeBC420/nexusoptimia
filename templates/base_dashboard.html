@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/nexusoptim-styles.css">
+    <style>
+        body {
+            background: #181c24;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px 8px 32px;
+            border-bottom: 2px solid #222;
+        }
+        .dashboard-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .dashboard-tabs {
+            display: flex;
+            gap: 18px;
+            margin: 18px 0 0 32px;
+        }
+        .dashboard-tab {
+            padding: 10px 28px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: #23272f;
+            color: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .dashboard-tab.active {
+            background: var(--main-color, #2ecc40);
+            color: #fff;
+        }
+        .dashboard-content {
+            padding: 32px;
+        }
+        .main-btn {
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            padding: 24px 0;
+            margin: 18px 0;
+            width: 100%;
+            color: #fff;
+            cursor: pointer;
+            transition: filter 0.2s;
+        }
+        .main-btn:hover {
+            filter: brightness(1.1);
+        }
+        /* Color classes for modules */
+        .btn-electric { background: linear-gradient(90deg, #1de982 60%, #0e7c3a 100%); }
+        .btn-tourism { background: linear-gradient(90deg, #00e6e6 60%, #008b8b 100%); }
+        .btn-tutor { background: linear-gradient(90deg, #3a8dde 60%, #1a237e 100%); }
+        .btn-water { background: linear-gradient(90deg, #4fc3f7 60%, #0288d1 100%); }
+        .btn-home { background: linear-gradient(90deg, #ffe066 60%, #ffd600 100%); color: #333; }
+        .btn-hidden { background: linear-gradient(90deg, #bdbdbd 60%, #616161 100%); }
+        /* Paneles */
+        .dashboard-panel {
+            background: #23272f;
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px #0002;
+        }
+        .dashboard-panel h2 {
+            color: var(--main-color, #2ecc40);
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .dashboard-panel-yellow h2 { color: #ffd600; }
+        .dashboard-panel-turquoise h2 { color: #00e6e6; }
+        .dashboard-panel-blue h2 { color: #3a8dde; }
+        .dashboard-panel-celeste h2 { color: #4fc3f7; }
+        .dashboard-panel-green h2 { color: #1de982; }
+        .dashboard-panel-hidden h2 { color: #bdbdbd; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body style="--main-color: {{ main_color|default('#2ecc40') }};">
+    <div class="dashboard-header">
+        <div class="dashboard-title">{{ header|default('NexusOptim IA') }}</div>
+        <div>{{ version|default('v1.0') }}</div>
+    </div>
+    {% block tabs %}{% endblock %}
+    <div class="dashboard-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

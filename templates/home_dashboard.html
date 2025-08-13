@@ -1,0 +1,24 @@
+{% extends "base_dashboard.html" %}
+{% block tabs %}
+<div class="dashboard-tabs">
+    <a href="/dashboard/executive"><button class="dashboard-tab btn-electric">⚡ Eléctrica</button></a>
+    <a href="/dashboard/tourism"><button class="dashboard-tab btn-tourism">🌴 Turismo</button></a>
+    <a href="/dashboard/tutor"><button class="dashboard-tab btn-tutor">🎓 Tutor</button></a>
+    <a href="/dashboard/water"><button class="dashboard-tab btn-water">💧 Agua</button></a>
+    <a href="/dashboard/home"><button class="dashboard-tab active btn-home">🏠 Casa</button></a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="dashboard-panel dashboard-panel-yellow">
+    <h2>Casa Inteligente</h2>
+    <ul>
+        <li>Dispositivos conectados: {{ data.connected_devices }}</li>
+        <li>Estado de seguridad: {{ data.security_status }}</li>
+        <li>Clima interior: {{ data.indoor_climate }}</li>
+    </ul>
+</div>
+<div class="dashboard-panel dashboard-panel-yellow">
+    <h2>Control de Dispositivos IoT</h2>
+    <p>Aquí se mostrarán los controles para dispositivos inteligentes.</p>
+</div>
+{% endblock %}

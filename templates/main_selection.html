@@ -1,0 +1,30 @@
+{% extends "base_dashboard.html" %}
+{% block extra_head %}
+<style>
+    .main-selection {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        justify-content: center;
+        margin-top: 48px;
+    }
+    .main-btn {
+        max-width: 320px;
+        min-width: 220px;
+        min-height: 90px;
+        font-size: 1.4rem;
+        box-shadow: 0 2px 8px #0003;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="main-selection">
+    <form action="/dashboard/executive" method="get"><button class="main-btn btn-electric">⚡ App Eléctrica</button></form>
+    <form action="/dashboard/tourism" method="get"><button class="main-btn btn-tourism">🌴 Turismo Inteligente</button></form>
+    <form action="/dashboard/tutor" method="get"><button class="main-btn btn-tutor">🎓 Tutor Estudiantil</button></form>
+    <form action="/dashboard/water" method="get"><button class="main-btn btn-water">💧 Agua</button></form>
+    <form action="/dashboard/home" method="get"><button class="main-btn btn-home">🏠 Casa Inteligente</button></form>
+    <!-- Si hay más módulos ocultos -->
+    <form action="/dashboard/hidden" method="get"><button class="main-btn btn-hidden">🔒 Función Oculta</button></form>
+</div>
+{% endblock %}
