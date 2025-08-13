@@ -3,6 +3,9 @@ import threading
 import importlib.util
 import time
 from PyQt6.QtCore import QTimer
+from PyQt6.QtWidgets import QMessageBox
+from src.core.orchestrator import NeXOptimIA_Orchestrator
+from src.core.types import ElectricalData
 
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QVBoxLayout, QHBoxLayout,
@@ -68,31 +71,6 @@ class Card(QGroupBox):
 
 
 class MainWindow(QMainWindow):
-    def show_transport(self):
-        self.show_module_tabbed("Transporte Inteligente", "#a259e6", [
-            ("Panel Transporte", self.create_transport_tab)
-        ])
-
-    def show_agriculture(self):
-        self.show_module_tabbed("Agricultura Inteligente", "#2e7d32", [
-            ("Panel Agricultura", self.create_agriculture_tab)
-        ])
-
-    def create_transport_tab(self):
-        tab = QWidget()
-        layout = QVBoxLayout()
-        layout.addWidget(QLabel("🚗 Panel de Transporte Inteligente (morado)\n[Próximamente: analítica de tráfico, optimización de rutas y semáforos]"))
-        tab.setLayout(layout)
-        tab.setStyleSheet("background: #f3e6fd; color: #111;")
-        return tab
-
-    def create_agriculture_tab(self):
-        tab = QWidget()
-        layout = QVBoxLayout()
-        layout.addWidget(QLabel("🌱 Panel de Agricultura Inteligente (verde oscuro)\n[Próximamente: monitoreo de cultivos, predicción de riego y alertas de plagas]"))
-        tab.setLayout(layout)
-        tab.setStyleSheet("background: #e8f5e9; color: #111;")
-        return tab
     def __init__(self):
         super().__init__()
         self.setWindowTitle("NeXOptimIA - Selección de Módulo")
@@ -104,6 +82,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central)
         self.main_layout = QVBoxLayout()
         self.central.setLayout(self.main_layout)
+        self.orchestrator = NeXOptimIA_Orchestrator()
+        self.orchestrator.load_module('electrical_monitor', 'src.modules.electrical_monitor.module', 'ElectricalMonitorModule')
+        self.orchestrator.start_module('electrical_monitor')
         self.show_main_selection()
 
     def show_main_selection(self):
@@ -369,26 +350,57 @@ class MainWindow(QMainWindow):
                     sim = HardwareSimulator()
                     sim.set_scenario(self.sim_scenario.lower().replace(' ', '_'))
                     reading = sim.generate_new_reading()
+                    # Convertir a ElectricalData para lógica de negocio
+                    data = ElectricalData(
+                        timestamp=time.time(),
+                        voltage_rms=reading.voltage_rms,
+                        current_rms=reading.current_rms,
+                        power_active=reading.power_active,
+                        power_reactive=reading.power_reactive,
+                        power_apparent=reading.power_active,  # simplificado
+                        power_factor=reading.power_factor,
+                        frequency=reading.frequency,
+                        thd_voltage=reading.thd_voltage,
+                        thd_current=reading.thd_current,
+                        safety_status=reading.safety_status,
+                        quality_grade=reading.quality_grade,
+                        node_id=reading.node_id
+                    )
+                    # Procesar con el módulo eléctrico
+                    result = self.orchestrator.process_electrical_data(data)
                     values = [
-                        ("Voltage RMS", f"{reading['Voltage RMS']:.2f} V"),
-                        ("Current RMS", f"{reading['Current RMS']:.2f} A"),
-                        ("Active Power", f"{reading['Active Power']:.1f} W"),
-                        ("Power Factor", f"{reading['Power Factor']:.3f}"),
-                        ("Frequency", f"{reading['Frequency']:.2f} Hz"),
-                        ("THD Voltage", f"{reading['THD Voltage']:.1f} %"),
-                        ("THD Current", f"{reading['THD Current']:.1f} %"),
-                        ("Power Quality Grade", reading['Power Quality Grade'])
+                        ("Voltage RMS", f"{reading.voltage_rms:.2f} V"),
+                        ("Current RMS", f"{reading.current_rms:.2f} A"),
+                        ("Active Power", f"{reading.power_active:.1f} W"),
+                        ("Power Factor", f"{reading.power_factor:.3f}"),
+                        ("Frequency", f"{reading.frequency:.2f} Hz"),
+                        ("THD Voltage", f"{reading.thd_voltage:.1f} %"),
+                        ("THD Current", f"{reading.thd_current:.1f} %"),
+                        ("Power Quality Grade", result['quality_grade'])
                     ]
+                    # Alertas visuales
+                    for alert in result['alerts']:
+                        if alert['level'] == 'CRITICAL':
+                            QMessageBox.critical(self, "Alerta Crítica Eléctrica", alert['msg'])
+                        elif alert['level'] == 'WARNING':
+                            QMessageBox.warning(self, "Alerta de Calidad Eléctrica", alert['msg'])
+                    # Safety status label
+                    safety_msgs = [a['msg'] for a in result['alerts'] if a['level'] == 'CRITICAL']
+                    if not safety_msgs:
+                        self.safety_label.setText("Safety Status\n• Voltage OK • Current OK • Power OK • Freq OK")
+                        self.safety_label.setStyleSheet("color: #00e676;")
+                    else:
+                        self.safety_label.setText("Safety Status\n" + " ".join(safety_msgs))
+                        self.safety_label.setStyleSheet("color: #e53935;")
                     # Simular series para gráficos
                     x = np.arange(0, 10)
                     y_data = [
-                        np.array([reading['Voltage RMS'] + np.random.normal(0, 0.5) for _ in range(10)]),
-                        np.array([reading['Current RMS'] + np.random.normal(0, 0.2) for _ in range(10)]),
-                        np.array([reading['Active Power'] + np.random.normal(0, 10) for _ in range(10)]),
-                        np.array([reading['Power Factor'] + np.random.normal(0, 0.01) for _ in range(10)]),
-                        np.array([reading['Frequency'] + np.random.normal(0, 0.02) for _ in range(10)]),
-                        np.array([reading['THD Voltage'] + np.random.normal(0, 0.2) for _ in range(10)]),
-                        # Demanda, generación, reservas simuladas según escenario
+                        np.array([reading.voltage_rms + np.random.normal(0, 0.5) for _ in range(10)]),
+                        np.array([reading.current_rms + np.random.normal(0, 0.2) for _ in range(10)]),
+                        np.array([reading.power_active + np.random.normal(0, 10) for _ in range(10)]),
+                        np.array([reading.power_factor + np.random.normal(0, 0.01) for _ in range(10)]),
+                        np.array([reading.frequency + np.random.normal(0, 0.02) for _ in range(10)]),
+                        np.array([reading.thd_voltage + np.random.normal(0, 0.2) for _ in range(10)]),
                         np.array([1800 + (400 if self.sim_scenario=="Sobrecarga" else 0) + np.random.normal(0, 30) for _ in range(10)]),
                         np.array([1700 + (300 if self.sim_scenario=="Sobrecarga" else 0) + np.random.normal(0, 30) for _ in range(10)]),
                         np.array([200 + (50 if self.sim_scenario=="Sobrecarga" else 0) + np.random.normal(0, 10) for _ in range(10)])

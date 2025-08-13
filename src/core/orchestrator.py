@@ -9,6 +9,7 @@ import json
 import time
 from src.modules.electrical_monitor.module import ElectricalMonitorModule
 from src.core.hardware_simulator import HardwareSimulator
+from src.core.types import ElectricalData
 
 class SystemInformation:
     """
@@ -105,6 +106,16 @@ class NeXOptimIA_Orchestrator:
             self.logger.info("Simulación de hardware detenida, vuelve a datos reales/simulados CENCE.")
         else:
             self.logger.error("No se encontró el módulo 'electrical_monitor' para detener la simulación.")
+
+    def process_electrical_data(self, data: ElectricalData) -> Dict:
+        """
+        Procesa un nuevo reporte eléctrico y lo pasa al módulo de monitoreo eléctrico.
+        Devuelve el resultado del procesamiento (alertas, calidad, etc).
+        """
+        mod = self.modules.get('electrical_monitor')
+        if mod and isinstance(mod, ElectricalMonitorModule):
+            return mod.process_new_data(data)
+        return {"quality_grade": "N/A", "alerts": []}
 
 class OrchestratorAI:
     """
